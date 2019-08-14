@@ -12,8 +12,11 @@ window.addEventListener('devicemotion', function(event) {
   }
   //  m/s² / 1000 * (miliseconds - miliseconds)/1000 /3600 => km/h (if I didn't made a mistake)
   // speedX += event.acceleration.x / 1000 * ((currentTime - lastTimestamp)/1000)/3600;
-  speedX += event.acceleration.x * ((currentTime - lastTimestamp)/1000) * 3.6; 
-  document.getElementById('speed').textContent = Math.round(speedX*100)/100;
+  speedX += event.acceleration.x * ((currentTime - lastTimestamp)/1000) * 3.6;   
+  speedY += event.acceleration.y * ((currentTime - lastTimestamp)/1000) * 3.6;   
+  speedZ += event.acceleration.z * ((currentTime - lastTimestamp)/1000) * 3.6; 
+  arr= [].push(speedX).push(speedY).push(speedZ)
+  document.getElementById('speed').textContent = Math.round((arr.sort((a,b)=> b-a )[0])*100)/100;
   //... same for Y and Z
   lastTimestamp = currentTime;
 }, false);
